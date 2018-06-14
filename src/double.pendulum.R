@@ -103,9 +103,10 @@ prediction.pendulum.by.ann <- function(ann.model, theta1=0, theta2=0, h=0, p.the
     if(i>2) {
       
       #######
-      #
-      # ADD YOUR CODE HERE
-      #
+      pred <- predict(ann.model, c(T1[i-2],T1[i-1],T2[i-2],T2[i-1]))
+      T1.pred <- c(T1.pred, pred[1])
+      T2.pred <- c(T2.pred, pred[2])
+      
       ########
     }
     # plot.thetas(1:i,T1,T2,TN1,TN2,abs(T1-TN1),abs(T2-TN2), dynamic=TRUE)
@@ -220,7 +221,7 @@ run_pendulum_experiment <- function(){
     plot.double.pendulum(TN1[i], TN2[i], L, col="red")
 
     Sys.sleep(0.1)
-    cat(paste(i, "\n"))
+    # cat(paste(i, "\n"))
   }
 
   ## Uncomment if you want to plot thetas
