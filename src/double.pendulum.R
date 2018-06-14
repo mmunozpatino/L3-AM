@@ -67,9 +67,10 @@ create_dataset <- function(theta1=0, theta2=0, h=0, p.theta1=0, p.theta2=0)
 
     if(i>2) {
       #######
-      #
-      # ADD YOUR CODE HERE
-      #
+      
+      X[i-2,] <- c(T1[i-2],T1[i-1],T2[i-2],T2[i-1])
+      Y[i-2,] <- c(T1[i],T2[i])
+      
       ########
     }
   }
