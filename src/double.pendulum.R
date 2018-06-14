@@ -105,12 +105,15 @@ prediction.pendulum.by.ann <- function(ann.model, theta1=0, theta2=0, h=0, p.the
     if(i>2) {
       
       #######
-      #
-      # ADD YOUR CODE HERE
-      #
+     
+      pred <- predict(ann.model,t(c(T1[i-2],T1[i-1],T2[i-2],T2[i-1])))
+      T1.pred <- c(T1.pred, pred[1]) 
+      T2.pred <- c(T2.pred, pred[2])
+      
+      
       ########
     }
-    # plot.thetas(1:i,T1,T2,TN1,TN2,abs(T1-TN1),abs(T2-TN2), dynamic=TRUE)
+     plot.thetas(1:i,T1,T2,TN1,TN2,abs(T1-TN1),abs(T2-TN2), dynamic=TRUE)
   }
 
   ret <- list(T1=T1,T2=T2,TN1=T1.pred,TN2=T2.pred)
@@ -140,13 +143,12 @@ prediction.pendulum.by.svr <- function(svr1.model, svr2.model ,theta1=0, theta2=
 
     if(i>2) {
       #######
-      #
-      # ADD YOUR CODE HERE
-      #
+      T1.pred <- c(T1.pred,predict(svr1.model,t(c(T1[i-2],T1[i-1],T2[i-2],T2[i-1]))))
+      T2.pred <- c(T2.pred,predict(svr2.model,t(c(T1[i-2],T1[i-1],T2[i-2],T2[i-1]))))
       ########
       
       }
-    # plot.thetas(1:i,T1,T2,TN1,TN2,abs(T1-TN1),abs(T2-TN2), dynamic=TRUE)
+     plot.thetas(1:i,T1,T2,TN1,TN2,abs(T1-TN1),abs(T2-TN2), dynamic=TRUE)
     
   }
 
@@ -226,7 +228,7 @@ run_pendulum_experiment <- function(){
   }
 
   ## Uncomment if you want to plot thetas
-  #plot.thetas(500:1000,T1,T2,TN1,TN2,abs(T1-TN1),abs(T2-TN2))
+  plot.thetas(500:1000,T1,T2,TN1,TN2,abs(T1-TN1),abs(T2-TN2))
 
   ## SVR
 
@@ -262,5 +264,5 @@ run_pendulum_experiment <- function(){
   }
 
   ## Uncomment if you want to plot thetas
-  #plot.thetas(500:1000,T1,T2,TN1,TN2,abs(T1-TN1),abs(T2-TN2))
+  plot.thetas(500:1000,T1,T2,TN1,TN2,abs(T1-TN1),abs(T2-TN2))
 }
