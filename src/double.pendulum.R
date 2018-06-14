@@ -139,9 +139,11 @@ prediction.pendulum.by.svr <- function(svr1.model, svr2.model ,theta1=0, theta2=
 
     if(i>2) {
       #######
-      #
-      # ADD YOUR CODE HERE
-      #
+      T1.pred <- c(T1.pred,predict(svr1.model,t(c(T1[i-2],T1[i-1],T2[i-2],T2[i-1]))))
+      T2.pred <- c(T2.pred,predict(svr2.model,t(c(T1[i-2],T1[i-1],T2[i-2],T2[i-1]))))
+      # pred <- predict(ann.model, c(T1[i-2],T1[i-1],T2[i-2],T2[i-1]))
+      # T1.pred <- c(T1.pred, pred[1])
+      # T2.pred <- c(T2.pred, pred[2])
       ########
       
       }
@@ -257,7 +259,7 @@ run_pendulum_experiment <- function(){
     plot.double.pendulum(TN1[i], TN2[i], L, col="red")
 
     Sys.sleep(0.1)
-    cat(paste(i, "\n"))
+    # cat(paste(i, "\n"))
   }
 
   ## Uncomment if you want to plot thetas
